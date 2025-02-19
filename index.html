@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Job Application Tracker</h1>
+
+        <!-- Job Form -->
+        <div class="job-form">
+            <input type="text" id="jobTitle" placeholder="Job Title" required>
+            <input type="text" id="company" placeholder="Company" required>
+            <input type="date" id="applicationDate">
+            <select id="status">
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Offer">Offer</option>
+            </select>
+            <button id="addJob">Add Job</button>
+        </div>
+
+        <!-- Job List -->
+        <div class="job-list">
+            <h2>Your Applications</h2>
+            <ul id="jobContainer"></ul>
+        </div>
+    </div>
+
+</body>
+</html>
