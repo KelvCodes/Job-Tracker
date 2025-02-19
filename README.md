@@ -37,7 +37,6 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 1️⃣ **Add a Job** – Enter job details like company, position, and application date. 🏢  
 
 2️⃣ **Track Your Progress** – Mark jobs as **Applied, Interviewed, or Offered**. 🎯  
-3. **Stay Updated** – Set reminders for follow-ups and deadlines. 🔔  
 
 3️⃣ **Live Preview** – See your resume and cover letter update in real time. 👀  
 
