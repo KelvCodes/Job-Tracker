@@ -1,4 +1,4 @@
-# 
+# 📝 Job Tracker Pro
 
   A **powerful** and **user-friendly** web app that helps job seekers **create professional resumes & cover letters instantly**! 📝💼  
 Featuring **AI-powered suggestions**, **real-time previews**, **dark mode**, and **PDF export** – all in a sleek, responsive interface. 🚀  
