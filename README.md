@@ -6,7 +6,7 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 ---
 
 ## 🌟 Features  
-- ✅ **📄 Instant Resume & Cover Letter Generation** – Get a polished document in seconds. . 
+- ✅ **📌 Track Job Applications** – Keep all your job applications in one place.
 -  ✅ **🤖 AI Suggestions** – Smart recommendations for skills, experience, and cover letter content.
 - ✅ **🎨 Sleek UI** – A stunning, modern, and responsive interface..  
 - ✅ **🌙 Dark Mode** – Switch between light & dark themes.
