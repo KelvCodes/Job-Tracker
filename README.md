@@ -34,7 +34,7 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 ---
 
 ## 🚀 How to Use 
-1️⃣ **Fill in your details** – Enter your name, email, work experience, and skills. ✍️
+1️⃣ 
 
 2️⃣ **AI Suggestions** – Click "Get AI Suggestions" for content recommendations. 🤖  
 
