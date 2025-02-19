@@ -1,5 +1,3 @@
-
-
 # 📄MakeMeACV
 
   A **powerful** and **user-friendly** web app that helps job seekers **create professional resumes & cover letters instantly**! 📝💼  
