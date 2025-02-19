@@ -34,7 +34,7 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 ---
 
 ## 🚀 How to Use 
-1️⃣ 
+1️⃣ **Add a Job** – Enter job details like company, position, and application date. 🏢  
 
 2️⃣ **AI Suggestions** – Click "Get AI Suggestions" for content recommendations. 🤖  
 
