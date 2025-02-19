@@ -42,7 +42,7 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 
 4️⃣ **Download Your List** – Export your job applications for easy access. 📥  
 
-5️⃣ **Download as PDF** – Save your resume & cover letter with a single click! 📥  
+
 
 ---
 
