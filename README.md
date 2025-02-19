@@ -12,7 +12,7 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 - ✅ **🎨 Sleek UI & Transitions** – A visually stunning and user-friendly design.  
 - ✅ **🌙 Dark Mode** – Work comfortably in any lighting condition.  
 - ✅ **📱 Fully Responsive** – Optimized for mobile & desktop use.  
-- ✅ **📥 Download as PDF** – High-quality resume & cover letter export.
+.
 - ✅ **📱 Fully Responsive** – Works flawlessly on mobile & desktop.
     
 ---      
