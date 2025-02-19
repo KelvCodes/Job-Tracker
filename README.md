@@ -8,7 +8,7 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 ## 🌟 Features  
 - ✅ **📌 Track Job Applications** – Keep all your job applications in one place.
 - ✅ **📅 Status Updates** – Mark jobs as **applied, interviewed, or offered**. 
-- ✅ **🎨 Sleek UI** – A stunning, modern, and responsive interface..  
+- ✅ **🔔 Smart Alerts** – Get reminders for follow-ups and deadlines.  .  
 - ✅ **🌙 Dark Mode** – Switch between light & dark themes.
 - ✅ **🖼️ Profile Picture Upload** – Personalize your resume with your photo.
 - ✅ **🌍 Social Links** – Add LinkedIn, GitHub, and portfolio links.
