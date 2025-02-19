@@ -38,7 +38,7 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 
 2️⃣ **Track Your Progress** – Mark jobs as **Applied, Interviewed, or Offered**. 🎯  
 
-3️⃣ **Live Preview** – See your resume and cover letter update in real time. 👀  
+3️⃣ **Stay Updated** – Set reminders for follow-ups and deadlines. 🔔
 
 4️⃣ **Customize it** – Add a profile picture, social links, and certifications. 🏆 
 
