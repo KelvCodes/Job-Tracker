@@ -1,13 +1,4 @@
 
-/* Button Styling */
-button {
-    background: linear-gradient(135deg, #ff512f, #dd2476);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
 button:hover {
     background: linear-gradient(135deg, #ff6a00, #ee0979);
     transform: scale(1.05);
