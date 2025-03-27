@@ -1,10 +1,4 @@
-    -webkit-backdrop-filter: blur(10px);
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease-in-out;
-}
+
 
 .container:hover {
     transform: scale(1.02);
