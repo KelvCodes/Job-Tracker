@@ -1,12 +1,4 @@
-dex) {
-        jobs.splice(index, 1);
-        saveJobs();
-        renderJobs();
-    }
-
-    window.deleteJob = deleteJob;
-
-    addJobButton.addEventListener("click", function() {
+deck", function() {
         if (jobTitle.value.trim() === "" || company.value.trim() === "") {
             alert("Please enter both Job Title and Company.");
             return;
