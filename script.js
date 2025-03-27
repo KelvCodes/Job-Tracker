@@ -1,12 +1,5 @@
 date: applicationDate.value,
-            status: status.value
-        };
-
-        jobs.push(newJob);
-        saveJobs();
-        renderJobs();
-
-        // Clear input fields
+ar input fields
         jobTitle.value = "";
         company.value = "";
         applicationDate.value = "";
