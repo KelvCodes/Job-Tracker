@@ -2,8 +2,6 @@
             const jobItem = document.createElement("li");
             jobItem.classList.add("job-item");
 
-            jobItem.innerHTML = `
-                <div>
                     <strong>${job.title}</strong> at ${job.company} <br>
                     <small>${job.date ? "📅 " + job.date : ""}</small>  
                     <span class="status">(${job.status})</span>
