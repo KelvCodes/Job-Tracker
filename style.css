@@ -1,15 +1,4 @@
 
-button:hover {
-    background: linear-gradient(135deg, #ff6a00, #ee0979);
-    transform: scale(1.05);
-}
-
-/* Job List */
-.job-list {
-    margin-top: 20px;
-    text-align: left;
-}
-
 .job-item {
     background: rgba(255, 255, 255, 0.15);
     margin-top: 10px;
