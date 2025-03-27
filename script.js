@@ -1,10 +1,4 @@
-bs() {
-        localStorage.setItem("jobs", JSON.stringify(jobs));
-    }
-
-    function renderJobs() {
-        jobContainer.innerHTML = "";
-        jobs.forEach((job, index) => {
+.forEach((job, index) => {
             const jobItem = document.createElement("li");
             jobItem.classList.add("job-item");
 
