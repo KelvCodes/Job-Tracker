@@ -1,13 +1,4 @@
-job.date ? "📅 " + job.date : ""}</small>  
-                    <span class="status">(${job.status})</span>
-                </div>
-                <button class="delete-btn" onclick="deleteJob(${index})">❌</button>
-            `;
-            jobContainer.appendChild(jobItem);
-        });
-    }
-
-    function deleteJob(index) {
+dex) {
         jobs.splice(index, 1);
         saveJobs();
         renderJobs();
