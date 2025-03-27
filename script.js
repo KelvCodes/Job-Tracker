@@ -1,8 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const jobTitle = document.getElementById("jobTitle");
-    const company = document.getElementById("company");
-    const applicationDate = document.getElementById("applicationDate");
-    const status = document.getElementById("status");
+st status = document.getElementById("status");
     const addJobButton = document.getElementById("addJob");
     const jobContainer = document.getElementById("jobContainer");
 
