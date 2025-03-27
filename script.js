@@ -1,9 +1,4 @@
-.forEach((job, index) => {
-            const jobItem = document.createElement("li");
-            jobItem.classList.add("job-item");
-
-                    <strong>${job.title}</strong> at ${job.company} <br>
-                    <small>${job.date ? "📅 " + job.date : ""}</small>  
+job.date ? "📅 " + job.date : ""}</small>  
                     <span class="status">(${job.status})</span>
                 </div>
                 <button class="delete-btn" onclick="deleteJob(${index})">❌</button>
