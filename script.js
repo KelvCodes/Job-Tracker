@@ -1,8 +1,4 @@
-st status = document.getElementById("status");
-    const addJobButton = document.getElementById("addJob");
-    const jobContainer = document.getElementById("jobContainer");
-
-    // Load jobs from localStorage
+bs from localStorage
     let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
 
     function saveJobs() {
