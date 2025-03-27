@@ -1,13 +1,4 @@
 
-    background: rgba(255, 255, 255, 0.3);
-    color: #fff;
-    outline: none;
-}
-
-input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
 /* Button Styling */
 button {
     background: linear-gradient(135deg, #ff512f, #dd2476);
