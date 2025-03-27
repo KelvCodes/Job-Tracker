@@ -1,7 +1,4 @@
-bs from localStorage
-    let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-
-    function saveJobs() {
+bs() {
         localStorage.setItem("jobs", JSON.stringify(jobs));
     }
 
