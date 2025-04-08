@@ -60,7 +60,7 @@ Track applications, monitor statuses, and never miss an opportunity again! ✅
 
 ## 🤝 Contributing  
 
-Want to make thsJob Tracker Pro even better? We’d love your help! 💡  
+Want to make thJob Tracker Pro even better? We’d love your help! 💡  
 1. Fork this repository.  
 2. Create a new branch:  
    ```bash  
