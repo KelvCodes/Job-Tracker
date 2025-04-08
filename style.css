@@ -1,9 +1,4 @@
- --gray: #2d2d2d;
-
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
+ding: 0;
     background: linear-gradient(to bottom right, #000000, #1a1a1a, #7f1d1d);
     color: var(--light);
     min-height: 100vh;
