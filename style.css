@@ -1,11 +1,4 @@
 
-.dark-mode-toggle:hover {
-    background: var(--secondary);
-    color: var(--light);
-}
-
-/* Hero Section */
-.landing-page .hero {
     flex: 1;
     display: flex;
     justify-content: center;
