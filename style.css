@@ -1,9 +1,4 @@
 
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary);
-}
-
 /* Firefox fallback */
 html {
     scrollbar-width: thin;
