@@ -1,8 +1,4 @@
-kit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 4px;
-    transition: background 0.3s ease;
-}
+
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary);
