@@ -1,9 +1,4 @@
-verflow-x: hidden;
- width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
+bkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 4px;
 }
