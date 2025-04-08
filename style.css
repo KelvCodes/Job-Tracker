@@ -1,9 +1,4 @@
-bkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
+kit-scrollbar-thumb {
     background: var(--primary);
     border-radius: 4px;
     transition: background 0.3s ease;
