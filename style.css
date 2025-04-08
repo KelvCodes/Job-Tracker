@@ -1,12 +1,4 @@
-
-/* Header */
-.header {
-    background: linear-gradient(to bottom right, #000000, #1a1a1a, #7f1d1d);
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+x-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     flex-wrap: wrap;
     position: sticky;
     top: 0;
