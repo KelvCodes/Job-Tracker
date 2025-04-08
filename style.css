@@ -1,12 +1,3 @@
-lbar-color: var(--primary) rgba(255, 255, 255, 0.05);
-}
-
-body.landing-page {
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
 
 /* Header */
 .header {
