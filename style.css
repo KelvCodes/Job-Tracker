@@ -1,13 +1,7 @@
 connect-wallet-btn, .dark-mode-toggle, .cta-btn {
     background: var(--light);
     color: var(--primary);
-}
-
-.back-btn {
-    background: var(--gray);
-    color: var(--light);
-    width: 100%;
-    margin-top: 1rem;
+}op: 1rem;
 }
 
 button:hover {
