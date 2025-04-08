@@ -1,8 +1,4 @@
-
-/* Ensure no horizontal scrolling on mobile */
-html, body {
-    width: 100%;
-    overflow-x: hidden;
+verflow-x: hidden;
 }
 
 /* Scrollbar Styling */
