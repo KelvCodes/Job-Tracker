@@ -1,15 +1,4 @@
-
-
-.header-controls {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-/* Buttons */
-.connect-wallet-btn, .dark-mode-toggle, .cta-btn, .back-btn {
-    padding: 0.6rem 1.2rem;
-    border: none;
+rder: none;
     border-radius: 50px;
     cursor: pointer;
     font-weight: 600;
