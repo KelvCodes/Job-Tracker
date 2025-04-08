@@ -1,8 +1,4 @@
-
-/* Firefox fallback */
-html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary) rgba(255, 255, 255, 0.05);
+lbar-color: var(--primary) rgba(255, 255, 255, 0.05);
 }
 
 body.landing-page {
