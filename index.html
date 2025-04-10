@@ -1,1 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobSpy - Advanced Job Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+    <div class="theme-switcher">
+        <button id="themeToggle"><i class="fas fa-moon"></i></button>
+    </div>
+    
+    <div class="container">
+        <header class="glass-header">
+            <h1><i class="fas fa-briefcase"></i> JobSpy <span class="pro-badge">Pro</span></h1>
+            <p class="subtitle">Your professional job application command center</p>
+        </header>
 
+        <div class="dashboard-grid">
+            <!-- Stats Card -->
+            <div class="glass-card stats-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-pie"></i> Application Analytics</h3>
+                    <div class="card-actions">
+                        <button class="icon-btn" id="refreshStats"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat" style="--stat-color: #4cc9f0">
+                        <span class="stat-value" id="total-apps">0</span>
+                        <span class="stat-label">Total</span>
+                        <div class="stat-progress"></div>
+                    </div>
+                    <div class="stat" style="--stat-color: #4895ef">
+                        <span class="stat-value" id="active-apps">0</span>
+                        <span class="stat-label">Active</span>
+                        <div class="stat-progress"></div>
+                    </div>
+                    <div class="stat" style="--stat-color: #f8961e">
+                        <span class="stat-value" id="interview-apps">0</span>
+                        <span class="stat-label">Interviews</span>
+                        <div class="stat-progress"></div>
+                    </div>
+                    <div class="stat" style="--stat-color: #2ecc71">
+                        <span class="stat-value" id="offer-apps">0</span>
+                        <span class="stat-label">Offers</span>
+                        <div class="stat-progress"></div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Timeline Card -->
+            <div class="glass-card timeline-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-stream"></i> Application Timeline</h3>
+                </div>
+                <div class="timeline" id="timeline">
+                    <!-- Timeline items will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Job Search Card -->
+            <div class="glass-card search-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-search"></i> Job Discovery</h3>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="jobSearch" placeholder="Search for jobs...">
+                    <button id="searchBtn" class="gradient-btn search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-filters">
+                    <select id="searchLocation">
+                        <option value="">Any Location</option>
+                        <option value="remote">Remote</option>
+                        <option value="new york">New York</option>
+                        <option value="san francisco">San Francisco</option>
+                    </select>
+                    <select id="searchType">
+                        <option value="">Any Type</option>
+                        <option value="fulltime">Full-time</option>
+                        <option value="parttime">Part-time</option>
+                        <option value="contract">Contract</option>
+                    </select>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </div>
+
+        <!-- Main Application Tracker -->
+        <div class="glass-card tracker-card">
+            <div class="card-header">
+                <h3><i class="fas fa-tasks"></i> Application Tracker</h3>
+                <div class="card-actions">
+                    <button id="addJobBtn" class="gradient-btn primary-btn">
+                        <i class="fas fa-plus"></i> Add Application
+                    </button>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <div class="filter-group">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search" placeholder="Search applications...">
+                    </div>
+                    <select id="statusFilter">
+                        <option value="all">All Statuses</option>
+                        <option value="Saved">Saved</option>
+                        <option value="Applied">Applied</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Offer">Offer</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                    <select id="sort">
+                        <option value="date-desc">Newest First</option>
+                        <option value="date-asc">Oldest First</option>
+                        <option value="title">A-Z</option>
+                        <option value="company">Company</option>
+                        <option value="salary">Salary</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="job-list" id="jobContainer"></div>
+        </div>
+    </div>
+
+    <!-- Modern Footer -->
+    <footer class="glass-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-briefcase"></i> JobSpy</h3>
+                    <p>Your ultimate job application management system</p>
+                    <div class="footer-social">
+                        <a href="https://www.youtube.com/@TechTutor_Tv?sub_confirmation=1" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/in/kelvin-agyare-yeboah-6728a7301/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/KelvCodes" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="Product Hunt"><i class="fab fa-product-hunt"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Changelog</a></li>
+                        <li><a href="#">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">API Docs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for the latest updates</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="gradient-btn primary-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 JobSpy. All rights reserved.</p>
+                <div class="footer-lang">
+                    <select>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add Job Modal -->
+    <div id="jobModal" class="modal">
+        <div class="modal-content glass-modal">
+            <span class="close-btn">&times;</span>
+            <h2><i class="fas fa-file-alt"></i> Track New Application</h2>
+            <form id="jobForm">
+                <div class="form-tabs">
+                    <div class="tab active" data-tab="basic">Basic Info</div>
+                    <div class="tab" data-tab="details">Details</div>
+                    <div class="tab" data-tab="interview">Interview</div>
+                </div>
+                
+                <div class="tab-content active" data-tab-content="basic">
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title*</label>
+                        <input type="text" id="jobTitle" placeholder="e.g. Senior Frontend Developer" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">Company*</label>
+                            <input type="text" id="company" placeholder="Company Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicationDate">Application Date</label>
+                            <input type="date" id="applicationDate">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="status">Status*</label>
+                            <select id="status" required>
+                                <option value="Saved">Saved</option>
+                                <option value="Applied" selected>Applied</option>
+                                <option value="Interview">Interview</option>
+                                <option value="Offer">Offer</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="priority">Priority</label>
+                            <select id="priority">
+                                <option value="Low">Low</option>
+                                <option value="Medium" selected>Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" data-tab-content="details">
+                    <div class="form-group">
+                        <label for="jobUrl">Job Posting URL</label>
+                        <input type="url" id="jobUrl" placeholder="https://company.com/careers/123">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="salary">Salary Range</label>
+                            <input type="text" id="salary" placeholder="$90,000 - $120,000">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="e.g. Remote, New York">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" placeholder="Add any important notes about this application..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="tab-content" data-tab-content="interview">
+                    <div class="form-group">
+                        <label for="interviewDate">Interview Date</label>
+                        <input type="datetime-local" id="interviewDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="interviewType">Interview Type</label>
+                        <select id="interviewType">
+                            <option value="">Select type</option>
+                            <option value="Phone">Phone Screen</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Behavioral">Behavioral</option>
+                            <option value="Onsite">Onsite</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="interviewPrep">Preparation Notes</label>
+                        <textarea id="interviewPrep" placeholder="Research points, questions to ask, etc."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="interviewFeedback">Feedback</label>
+                        <textarea id="interviewFeedback" placeholder="Interviewer comments, your impressions..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="secondary-btn" id="prevTab">Previous</button>
+                    <button type="button" class="secondary-btn" id="nextTab">Next</button>
+                    <button type="submit" class="gradient-btn primary-btn">Save Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Job Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content glass-modal">
+            <span class="close-btn">&times;</span>
+            <div id="jobDetailsContent"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
