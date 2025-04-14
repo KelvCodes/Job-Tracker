@@ -1,8 +1,4 @@
-st statusFilter = document.getElementById("statusFilter");
-    const sortSelect = document.getElementById("sort");
-    const jobSearch = document.getElementById("jobSearch");
-    const searchBtn = document.getElementById("searchBtn");
-    const searchResults = document.getElementById("searchResults");
+const searchResults = document.getElementById("searchResults");
     const themeToggle = document.getElementById("themeToggle");
     const refreshStats = document.getElementById("refreshStats");
     const timeline = document.getElementById("timeline");
