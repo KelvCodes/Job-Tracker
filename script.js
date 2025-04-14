@@ -1,11 +1,4 @@
 
-    function setupEventListeners() {
-        // Modal controls
-        addJobBtn.addEventListener("click", () => {
-            jobModal.style.display = "block";
-            document.getElementById("jobTitle").focus();
-        });
-        
         closeBtns.forEach(btn => btn.addEventListener("click", closeModals));
         
         // Close modal when clicking outside
