@@ -1,10 +1,4 @@
-
-        const newJob = {
-            id: Date.now().toString(),
-            title: jobTitle,
-            company: company,
-            date: applicationDate || new Date().toISOString().split('T')[0],
-            status: status,
+status: status,
             priority: priority,
             url: jobUrl,
             location: location,
