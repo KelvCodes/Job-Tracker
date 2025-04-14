@@ -1,9 +1,4 @@
-  tab.classList.add("active");
-            } else {
-                tab.classList.remove("active");
-            }
-        });
-        
+
         tabContents.forEach((content, index) => {
             if (index === currentTab) {
                 content.classList.add("active");
