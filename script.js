@@ -1,10 +1,4 @@
- if (e.target === jobModal) jobModal.style.display = "none";
-            if (e.target === detailsModal) detailsModal.style.display = "none";
-        });
-        
-        // Form submission
-        jobForm.addEventListener("submit", handleFormSubmit);
-        
+
         // Filter and sort controls
         searchInput.addEventListener("input", () => renderJobs());
         statusFilter.addEventListener("change", () => renderJobs());
