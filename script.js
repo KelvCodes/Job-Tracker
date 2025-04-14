@@ -1,10 +1,4 @@
-any = document.getElementById("company").value.trim();
-        const applicationDate = document.getElementById("applicationDate").value;
-        const status = document.getElementById("status").value;
-        const priority = document.getElementById("priority").value;
-        const jobUrl = document.getElementById("jobUrl").value;
-        const location = document.getElementById("location").value;
-        const salary = document.getElementById("salary").value;
+any st salary = document.getElementById("salary").value;
         const notes = document.getElementById("notes").value;
         const interviewDate = document.getElementById("interviewDate").value;
         const interviewType = document.getElementById("interviewType").value;
