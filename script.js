@@ -1,7 +1,4 @@
-
-    // Initialize jobs array from localStorage or empty array
-    let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-    let statusChart = null;
+et statusChart = null;
     let currentTab = 0;
     
     // Initialize the app
