@@ -1,11 +1,4 @@
-iewPrep = document.getElementById("interviewPrep").value;
-        const interviewFeedback = document.getElementById("interviewFeedback").value;
-        
-        if (!jobTitle || !company) {
-            alert("Please fill in required fields (Job Title and Company)");
-            return;
-        }
-        
+
         const newJob = {
             id: Date.now().toString(),
             title: jobTitle,
