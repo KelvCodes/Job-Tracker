@@ -1,9 +1,4 @@
- ion closeModals() {
-        jobModal.style.display = "none";
-        detailsModal.style.display = "none";
-        // Reset form tabs when closing
-        currentTab = 0;
-        updateTabs();
+eTabs();
     }
     
     function handleFormSubmit(e) {
