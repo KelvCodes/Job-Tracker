@@ -1,11 +1,4 @@
- statemeToggle.addEventListener("click", toggleTheme);
-        
-        // Refresh stats
-        refreshStats.addEventListener("click", () => {
-            updateStats();
-            animateStats();
-        });
-        
+      
         // Tab navigation
         prevTabBtn.addEventListener("click", () => switchTab(-1));
         nextTabBtn.addEventListener("click", () => switchTab(1));
