@@ -1,7 +1,4 @@
-/* Modern Color Palette */
-:root {
-    /* Dark Mode Colors */
-    --dark-bg: #121212;
+-dark-bg: #121212;
     --dark-surface: #1e1e1e;
     --dark-primary: #bb86fc;
     --dark-primary-variant: #3700b3;
