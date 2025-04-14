@@ -1,7 +1,4 @@
-
-        // Filter and sort controls
-        searchInput.addEventListener("input", () => renderJobs());
-        statusFilter.addEventListener("change", () => renderJobs());
+ statusFilter.addEventListener("change", () => renderJobs());
         sortSelect.addEventListener("change", () => renderJobs());
         
         // Job search
