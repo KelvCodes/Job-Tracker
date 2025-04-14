@@ -1,9 +1,4 @@
-/ Stats elements
-    const totalAppsEl = document.getElementById("total-apps");
-    const activeAppsEl = document.getElementById("active-apps");
-    const interviewAppsEl = document.getElementById("interview-apps");
-    const offerAppsEl = document.getElementById("offer-apps");
-    
+
     // Initialize jobs array from localStorage or empty array
     let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
     let statusChart = null;
