@@ -1,7 +1,4 @@
-             currentTab = index;
-                updateTabs();
-            });
-        });
+  });
     }
     
     function switchTab(direction) {
