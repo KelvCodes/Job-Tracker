@@ -1,17 +1,4 @@
-status: status,
-            priority: priority,
-            url: jobUrl,
-            location: location,
-            salary: salary,
-            notes: notes,
-            interview: {
-                date: interviewDate,
-                type: interviewType,
-                prep: interviewPrep,
-                feedback: interviewFeedback
-            },
-            createdAt: new Date().toISOString()
-        };
+
         
         jobs.push(newJob);
         saveJobs();
