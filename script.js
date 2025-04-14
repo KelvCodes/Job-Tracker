@@ -1,9 +1,4 @@
-
-    
-    function updateTabs() {
-        tabs.forEach((tab, index) => {
-            if (index === currentTab) {
-                tab.classList.add("active");
+  tab.classList.add("active");
             } else {
                 tab.classList.remove("active");
             }
