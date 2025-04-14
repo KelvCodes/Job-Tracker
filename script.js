@@ -1,7 +1,4 @@
-   initChart();
-        checkThemePreference();
-    }
-    
+
     function setupEventListeners() {
         // Modal controls
         addJobBtn.addEventListener("click", () => {
