@@ -1,10 +1,4 @@
-
-        tabContents.forEach((content, index) => {
-            if (index === currentTab) {
-                content.classList.add("active");
-            } else {
-                content.classList.remove("active");
-            }
+      }
         });
     }
     
