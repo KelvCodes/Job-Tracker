@@ -1,11 +1,4 @@
-eTabs();
-    }
-    
-    function handleFormSubmit(e) {
-        e.preventDefault();
-        
-        const jobTitle = document.getElementById("jobTitle").value.trim();
-        const company = document.getElementById("company").value.trim();
+any = document.getElementById("company").value.trim();
         const applicationDate = document.getElementById("applicationDate").value;
         const status = document.getElementById("status").value;
         const priority = document.getElementById("priority").value;
