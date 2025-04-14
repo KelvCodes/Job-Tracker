@@ -1,8 +1,4 @@
-      }
-        });
-    }
-    
-    function closeModals() {
+ ion closeModals() {
         jobModal.style.display = "none";
         detailsModal.style.display = "none";
         // Reset form tabs when closing
