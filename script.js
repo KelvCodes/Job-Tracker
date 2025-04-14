@@ -1,9 +1,5 @@
       
-        // Tab navigation
-        prevTabBtn.addEventListener("click", () => switchTab(-1));
-        nextTabBtn.addEventListener("click", () => switchTab(1));
-        
-        // Tab clicks
+      
         tabs.forEach((tab, index) => {
             tab.addEventListener("click", () => {
                 currentTab = index;
