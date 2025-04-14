@@ -1,9 +1,4 @@
-et statusChart = null;
-    let currentTab = 0;
-    
-    // Initialize the app
-    init();
-    
+
     function init() {
         renderJobs();
         updateStats();
