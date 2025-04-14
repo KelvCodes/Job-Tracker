@@ -1,9 +1,4 @@
- statusFilter.addEventListener("change", () => renderJobs());
-  if (e.key === "Enter") searchJobs();
-        });
-        
-        // Theme toggle
-        themeToggle.addEventListener("click", toggleTheme);
+ statemeToggle.addEventListener("click", toggleTheme);
         
         // Refresh stats
         refreshStats.addEventListener("click", () => {
