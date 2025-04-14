@@ -1,8 +1,4 @@
-any st salary = document.getElementById("salary").value;
-        const notes = document.getElementById("notes").value;
-        const interviewDate = document.getElementById("interviewDate").value;
-        const interviewType = document.getElementById("interviewType").value;
-        const interviewPrep = document.getElementById("interviewPrep").value;
+iewPrep = document.getElementById("interviewPrep").value;
         const interviewFeedback = document.getElementById("interviewFeedback").value;
         
         if (!jobTitle || !company) {
