@@ -1,10 +1,4 @@
-const jobForm = document.getElementById("jobForm");
-    const jobModal = document.getElementById("jobModal");
-    const detailsModal = document.getElementById("detailsModal");
-    const closeBtns = document.querySelectorAll(".close-btn");
-    const addJobBtn = document.getElementById("addJobBtn");
-    const searchInput = document.getElementById("search");
-    const statusFilter = document.getElementById("statusFilter");
+st statusFilter = document.getElementById("statusFilter");
     const sortSelect = document.getElementById("sort");
     const jobSearch = document.getElementById("jobSearch");
     const searchBtn = document.getElementById("searchBtn");
