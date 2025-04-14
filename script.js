@@ -1,10 +1,5 @@
  statusFilter.addEventListener("change", () => renderJobs());
-        sortSelect.addEventListener("change", () => renderJobs());
-        
-        // Job search
-        searchBtn.addEventListener("click", searchJobs);
-        jobSearch.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") searchJobs();
+  if (e.key === "Enter") searchJobs();
         });
         
         // Theme toggle
