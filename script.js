@@ -1,7 +1,4 @@
-  });
-if (currentTab >= tabs.length) currentTab = tabs.length - 1;
-        updateTabs();
-    }
+
     
     function updateTabs() {
         tabs.forEach((tab, index) => {
