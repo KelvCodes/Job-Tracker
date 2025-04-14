@@ -1,9 +1,4 @@
- const prevTabBtn = document.getElementById("prevTab");
-    const nextTabBtn = document.getElementById("nextTab");
-    const tabs = document.querySelectorAll(".tab");
-    const tabContents = document.querySelectorAll(".tab-content");
-    
-    // Stats elements
+/ Stats elements
     const totalAppsEl = document.getElementById("total-apps");
     const activeAppsEl = document.getElementById("active-apps");
     const interviewAppsEl = document.getElementById("interview-apps");
