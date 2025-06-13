@@ -1,9 +1,5 @@
 
 
-
-        fetchDefaultJobs();
-    }
-    
     function setupEventListeners() {
         // Modal controls
         addJobBtn.addEventListener("click", () => {
