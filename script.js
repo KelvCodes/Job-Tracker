@@ -1,10 +1,4 @@
-tion closeModals() {
-        jobModal.style.display = "none";
-        detailsModal.style.display = "none";
-        currentTab = 0;
-        updateTabs();
-        jobForm.reset();
-    }
+
     
     async function handleFormSubmit(e) {
         e.preventDefault();
