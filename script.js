@@ -1,7 +1,4 @@
 
-    cons
-
-    const themeToggle = document.getElementById("themeToggle");
     const refreshStats = document.getElementById("refreshStats");
     const timeline = document.getElementById("timeline");
     const prevTabBtn = document.getElementById("prevTab");
