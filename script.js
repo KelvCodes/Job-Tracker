@@ -1,7 +1,4 @@
 
-        jobForm.addEventListener("submit", handleFormSubmit);
-        
-        // Filter and sort controls
         searchInput.addEventListener("input", debounce(() => renderJobs(), 300));
         statusFilter.addEventListener("change", () => renderJobs());
         sortSelect.addEventListener("change", () => renderJobs());
