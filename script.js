@@ -1,8 +1,6 @@
 
     
-    // Stats elements
-    const totalAppsEl = document.getElementById("total-apps");
-    const activeAppsEl = document.getElementById("active-apps");
+
     const interviewAppsEl = document.getElementById("interview-apps");
     const offerAppsEl = document.getElementById("offer-apps");
     
