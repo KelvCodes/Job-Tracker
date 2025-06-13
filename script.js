@@ -1,7 +1,4 @@
 
-
-    const closeBtns = document.querySelectorAll(".close-btn");
-    const addJobBtn = document.getElementById("addJobBtn");
     const searchInput = document.getElementById("search");
     const statusFilter = document.getElementById("statusFilter");
     const sortSelect = document.getElementById("sort");
