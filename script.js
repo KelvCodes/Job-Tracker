@@ -1,9 +1,7 @@
 
  
 
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
+  
                 clearTimeout(timeout);
                 func(...args);
             };
