@@ -1,8 +1,7 @@
 
  
 arTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
+
     }
     
     function switchTab(direction) {
