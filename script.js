@@ -1,11 +1,4 @@
-
- 
-arTimeout(timeout);
-
-    }
-    
-    function switchTab(direction) {
-        currentTab += direction;
+b += direction;
         if (currentTab < 0) currentTab = 0;
         if (currentTab >= tabs.length) currentTab = tabs.length - 1;
         updateTabs();
