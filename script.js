@@ -1,6 +1,4 @@
 
-    const refreshStats = document.getElementById("refreshStats");
-    const timeline = document.getElementById("timeline");
     const prevTabBtn = document.getElementById("prevTab");
     const nextTabBtn = document.getElementById("nextTab");
     const tabs = document.querySelectorAll(".tab");
