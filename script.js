@@ -1,6 +1,4 @@
 
-        addJobBtn.addEventListener("click", () => {
-            jobModal.style.display = "block";
             document.getElementById("jobTitle").focus();
         });
         
