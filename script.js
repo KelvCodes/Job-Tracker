@@ -1,6 +1,6 @@
 
     cons
-    const searchResults = document.getElementById("searchResults");
+
     const themeToggle = document.getElementById("themeToggle");
     const refreshStats = document.getElementById("refreshStats");
     const timeline = document.getElementById("timeline");
