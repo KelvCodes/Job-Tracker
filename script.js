@@ -1,8 +1,5 @@
 
  
-        refreshStats.addEventListener("click", () => {
-            updateStats();
-            animateStats();
         });
         
         // Tab navigation
