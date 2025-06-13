@@ -1,5 +1,4 @@
 
-    const jobModal = document.getElementById("jobModal");
 
     const closeBtns = document.querySelectorAll(".close-btn");
     const addJobBtn = document.getElementById("addJobBtn");
