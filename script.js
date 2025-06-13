@@ -1,8 +1,5 @@
 
  
-        });
-        
-        // Tab navigation
         prevTabBtn.addEventListener("click", () => switchTab(-1));
         nextTabBtn.addEventListener("click", () => switchTab(1));
         
