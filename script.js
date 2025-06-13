@@ -1,6 +1,4 @@
 
-        searchBtn.addEventListener("click", searchJobs);
-        jobSearch.addEventListener("keypress", (e) => {
             if (e.key === "Enter") searchJobs();
         });
         
