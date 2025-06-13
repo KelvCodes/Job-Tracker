@@ -1,5 +1,5 @@
 
-    const searchBtn = document.getElementById("searchBtn");
+    cons
     const searchResults = document.getElementById("searchResults");
     const themeToggle = document.getElementById("themeToggle");
     const refreshStats = document.getElementById("refreshStats");
