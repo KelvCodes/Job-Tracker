@@ -1,6 +1,4 @@
 
-        searchInput.addEventListener("input", debounce(() => renderJobs(), 300));
-        statusFilter.addEventListener("change", () => renderJobs());
         sortSelect.addEventListener("change", () => renderJobs());
         
         // Job search
