@@ -1,8 +1,4 @@
 
-            if (e.key === "Enter") searchJobs();
-        });
-        
-        // Theme toggle
         themeToggle.addEventListener("click", toggleTheme);
         
         // Refresh stats
