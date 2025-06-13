@@ -1,13 +1,4 @@
-
-    
-    async function handleFormSubmit(e) {
-        e.preventDefault();
-        
-        const jobTitle = document.getElementById("jobTitle").value.trim();
-        const company = document.getElementById("company").value.trim();
-        const applicationDate = document.getElementById("applicationDate").value;
-        const status = document.getElementById("status").value;
-        const priority = document.getElementById("priority").value;
+priority = document.getElementById("priority").value;
         const jobUrl = document.getElementById("jobUrl").value;
         const location = document.getElementById("location").value;
         const salary = document.getElementById("salary").value;
