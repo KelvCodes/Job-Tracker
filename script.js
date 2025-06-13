@@ -1,8 +1,7 @@
 
     
 
-    let statusChart = null;
-    let currentTab = 0;
+    l
     
     // Initialize the app
     init();
