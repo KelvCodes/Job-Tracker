@@ -1,8 +1,5 @@
 
-    
-    function init() {
-        renderJobs();
-        updateStats();
+
         renderTimeline();
         setupEventListeners();
         initChart();
