@@ -1,6 +1,5 @@
  {
-            if (e.target === jobModal) jobModal.style.display = "none";
-            if (e.target === detailsModal) detailsModal.style.display = "none";
+            if (e;
         });
         
         // Form submission
