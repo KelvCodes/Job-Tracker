@@ -1,11 +1,6 @@
 
  
-
-  
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
+arTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
     }
