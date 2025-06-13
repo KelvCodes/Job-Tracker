@@ -1,11 +1,5 @@
 
     
-
-    l
-    
-    // Initialize the app
-    init();
-    
     function init() {
         renderJobs();
         updateStats();
