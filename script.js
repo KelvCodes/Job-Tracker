@@ -1,6 +1,6 @@
 
     const jobModal = document.getElementById("jobModal");
-    const detailsModal = document.getElementById("detailsModal");
+
     const closeBtns = document.querySelectorAll(".close-btn");
     const addJobBtn = document.getElementById("addJobBtn");
     const searchInput = document.getElementById("search");
