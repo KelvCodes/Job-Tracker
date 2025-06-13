@@ -1,8 +1,4 @@
- {
-            if (e;
-        });
-        
-        // Form submission
+
         jobForm.addEventListener("submit", handleFormSubmit);
         
         // Filter and sort controls
