@@ -1,10 +1,6 @@
 
  
-        });
-    }
-    
-    // Debounce function to limit rapid event firing
-    function debounce(func, wait) {
+
         let timeout;
         return function executedFunction(...args) {
             const later = () => {
