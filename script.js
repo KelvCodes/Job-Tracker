@@ -1,7 +1,5 @@
 
-        
-        // Tab clicks
-        tabs.forEach((tab, index) => {
+ 
             tab.addEventListener("click", () => {
                 currentTab = index;
                 updateTabs();
