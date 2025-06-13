@@ -1,6 +1,4 @@
 
-    const searchInput = document.getElementById("search");
-    const statusFilter = document.getElementById("statusFilter");
     const sortSelect = document.getElementById("sort");
     const jobSearch = document.getElementById("jobSearch");
     const searchBtn = document.getElementById("searchBtn");
