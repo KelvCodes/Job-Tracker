@@ -1,7 +1,5 @@
 
-        themeToggle.addEventListener("click", toggleTheme);
-        
-        // Refresh stats
+ 
         refreshStats.addEventListener("click", () => {
             updateStats();
             animateStats();
