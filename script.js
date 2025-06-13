@@ -1,9 +1,4 @@
 
-    function updateTabs() {
-        tabs.forEach((tab, index) => {
-            tab.classList.toggle("active", index === currentTab);
-        });
-        
         tabContents.forEach((content, index) => {
             content.classList.toggle("active", index === currentTab);
         });
