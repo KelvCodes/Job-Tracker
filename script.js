@@ -1,8 +1,4 @@
-
-            document.getElementById("jobTitle").focus();
-        })
-        // Close modal when clicking outside
-        window.addEventListener("click", (e) => {
+ {
             if (e.target === jobModal) jobModal.style.display = "none";
             if (e.target === detailsModal) detailsModal.style.display = "none";
         });
