@@ -1,11 +1,7 @@
 priority = document.getElementById("priority").value;
         const jobUrl = document.getElementById("jobUrl").value;
         const location = document.getElementById("location").value;
-        const salary = document.getElementById("salary").value;
-        const notes = document.getElementById("notes").value;
-        const interviewDate = document.getElementById("interviewDate").value;
-        const interviewType = document.getElementById("interviewType").value;
-        const interviewPrep = document.getElementById("interviewPrep").value;
+        coewPrep = document.getElementById("interviewPrep").value;
         const interviewFeedback = document.getElementById("interviewFeedback").value;
         
         if (!jobTitle || !company) {
