@@ -1,9 +1,5 @@
 
  
-            tab.addEventListener("click", () => {
-                currentTab = index;
-                updateTabs();
-            });
         });
     }
     
