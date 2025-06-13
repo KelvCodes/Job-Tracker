@@ -1,6 +1,4 @@
 
-    const tabs = document.querySelectorAll(".tab");
-    const tabContents = document.querySelectorAll(".tab-content");
     
     // Stats elements
     const totalAppsEl = document.getElementById("total-apps");
