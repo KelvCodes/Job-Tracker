@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // DOM Elements
+
     const jobContainer = document.getElementById("jobContainer");
     const jobForm = document.getElementById("jobForm");
     const jobModal = document.getElementById("jobModal");
