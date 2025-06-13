@@ -1,8 +1,6 @@
 
 
-        renderTimeline();
-        setupEventListeners();
-        initChart();
+   
         checkThemePreference();
         // Load default job listings
         fetchDefaultJobs();
