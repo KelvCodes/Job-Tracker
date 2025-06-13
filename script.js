@@ -1,6 +1,4 @@
 
-    const prevTabBtn = document.getElementById("prevTab");
-    const nextTabBtn = document.getElementById("nextTab");
     const tabs = document.querySelectorAll(".tab");
     const tabContents = document.querySelectorAll(".tab-content");
     
