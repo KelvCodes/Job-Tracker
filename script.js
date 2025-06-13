@@ -1,8 +1,6 @@
 
 
-   
-        checkThemePreference();
-        // Load default job listings
+
         fetchDefaultJobs();
     }
     
