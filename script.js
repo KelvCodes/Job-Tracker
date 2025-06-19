@@ -1,7 +1,4 @@
 
-        refreshStats.addEventListener("click", () => {
-            updateStats();
-            animateStats();
         });
         
         // Navigate tabs with previous/next buttons
