@@ -1,6 +1,5 @@
 e
 
-    const tabs = document.querySelectorAll(".tab"); // Tab navigation elements
     const tabContents = document.querySelectorAll(".tab-content"); // Tab content sections
     
     // Stats elements: Display job application statistics
