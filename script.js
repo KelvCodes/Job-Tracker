@@ -1,6 +1,4 @@
-e
- // Total applications count
-    const activeAppsEl = document.getElementById("active-apps"); // Active applications count
+\cument.getElementById("active-apps"); // Active applications count
     const interviewAppsEl = document.getElementById("interview-apps"); // Interview stage count
     const offerAppsEl = document.getElementById("offer-apps"); // Offer stage count
     
