@@ -1,8 +1,4 @@
- wait);
-        };
-    }
-    
-    // Switch tabs by direction (-1 for previous, 1 for next)
+
     function switchTab(direction) {
         currentTab += direction;
         if (currentTab < 0) currentTab = 0; // Prevent negative index
