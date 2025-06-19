@@ -1,8 +1,6 @@
 
 
-    function closeModals() {
-        jobModal.style.display = "none";
-        detailsModal.style.display = "none";
+    functiosplay = "none";
         currentTab = 0;
         updateTabs();
         jobForm.reset();
