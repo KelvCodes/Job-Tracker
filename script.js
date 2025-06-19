@@ -1,6 +1,4 @@
 
-    const statusFilter = document.getElementById("statusFilter"); // Filter by job status
-    const sortSelect = document.getElementById("sort"); // Sort jobs dropdown
     const jobSearch = document.getElementById("jobSearch"); // Input for external job search
     const searchBtn = document.getElementById("searchBtn"); // Button to trigger job search
     const searchResults = document.getElementById("searchResults"); // Container for search results
