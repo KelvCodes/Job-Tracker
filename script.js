@@ -1,5 +1,4 @@
-// Wait for the DOM to be fully loaded before executing the script
-document.addEventListener("DOMContentLoaded", function() {
+
     // DOM Elements: References to various UI elements
     const jobContainer = document.getElementById("jobContainer"); // Container for job cards
     const jobForm = document.getElementById("jobForm"); // Form for adding/editing jobs
