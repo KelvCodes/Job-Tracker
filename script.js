@@ -1,7 +1,4 @@
 
-        // Open job form modal when clicking "Add Job" button
-        addJobBtn.addEventListener("click", () => {
-            jobModal.style.display = "block";
             document.getElementById("jobTitle").focus(); // Focus on job title input
         });
         
