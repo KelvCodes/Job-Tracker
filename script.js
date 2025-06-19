@@ -1,7 +1,4 @@
 
-        if (currentTab >= tabs.length) currentTab = tabs.length - 1; // Prevent overflow
-        updateTabs();
-    }
     
     // Update active tab and content visibility
     function updateTabs() {
