@@ -1,8 +1,4 @@
 
-        });
-        
-        // Navigate tabs with previous/next buttons
-        prevTabBtn.addEventListener("click", () => switchTab(-1));
         nextTabBtn.addEventListener("click", () => switchTab(1));
         
         // Switch to tab when clicked
