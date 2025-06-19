@@ -1,6 +1,5 @@
 
-    const jobForm = document.getElementById("jobForm"); // Form for adding/editing jobs
-    const jobModal = document.getElementById("jobModal"); // Modal for job form
+
     const detailsModal = document.getElementById("detailsModal"); // Modal for job details
     const closeBtns = document.querySelectorAll(".close-btn"); // Buttons to close modals
     const addJobBtn = document.getElementById("addJobBtn"); // Button to open job form
