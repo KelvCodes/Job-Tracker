@@ -1,6 +1,4 @@
-system theme
-        fetchDefaultJobs(); // Load default job listings
-    }
+
     
     // Set up event listeners for interactive elements
     function setupEventListeners() {
