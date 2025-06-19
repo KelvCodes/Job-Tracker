@@ -1,7 +1,4 @@
 
-    function switchTab(direction) {
-        currentTab += direction;
-        if (currentTab < 0) currentTab = 0; // Prevent negative index
         if (currentTab >= tabs.length) currentTab = tabs.length - 1; // Prevent overflow
         updateTabs();
     }
