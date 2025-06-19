@@ -1,7 +1,4 @@
 
-        sortSelect.addEventListener("change", () => renderJobs());
-        
-        // Trigger job search on button click or Enter key
         searchBtn.addEventListener("click", searchJobs);
         jobSearch.addEventListener("keypress", (e) => {
             if (e.key === "Enter") searchJobs();
