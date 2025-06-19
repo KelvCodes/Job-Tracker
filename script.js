@@ -1,5 +1,4 @@
 
-    const jobContainer = document.getElementById("jobContainer"); // Container for job cards
     const jobForm = document.getElementById("jobForm"); // Form for adding/editing jobs
     const jobModal = document.getElementById("jobModal"); // Modal for job form
     const detailsModal = document.getElementById("detailsModal"); // Modal for job details
