@@ -1,5 +1,4 @@
-/ Offer stage count
-    
+
     // Initialize jobs array from localStorage or empty array if none exists
     let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
     let statusChart = null; // Chart.js instance for status visualization
