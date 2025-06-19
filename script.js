@@ -1,8 +1,4 @@
 
-        nextTabBtn.addEventListener("click", () => switchTab(1));
-        
-        // Switch to tab when clicked
-        tabs.forEach((tab, index) => {
             tab.addEventListener("click", () => {
                 currentTab = index;
                 updateTabs();
