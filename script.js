@@ -1,9 +1,5 @@
 e
-
-    const tabContents = document.querySelectorAll(".tab-content"); // Tab content sections
-    
-    // Stats elements: Display job application statistics
-    const totalAppsEl = document.getElementById("total-apps"); // Total applications count
+ // Total applications count
     const activeAppsEl = document.getElementById("active-apps"); // Active applications count
     const interviewAppsEl = document.getElementById("interview-apps"); // Interview stage count
     const offerAppsEl = document.getElementById("offer-apps"); // Offer stage count
