@@ -1,7 +1,4 @@
-when clicking close buttons
-        closeBtns.forEach(btn => btn.addEventListener("click", closeModals));
-        
-        // Close modals when clicking outside their content
+t
         window.addEventListener("click", (e) => {
             if (e.target === jobModal) jobModal.style.display = "none";
             if (e.target === detailsModal) detailsModal.style.display = "none";
