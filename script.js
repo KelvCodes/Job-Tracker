@@ -1,8 +1,4 @@
-
-            document.getElementById("jobTitle").focus(); // Focus on job title input
-        });
-        
-        // Close modals when clicking close buttons
+when clicking close buttons
         closeBtns.forEach(btn => btn.addEventListener("click", closeModals));
         
         // Close modals when clicking outside their content
