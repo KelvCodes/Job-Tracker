@@ -1,7 +1,4 @@
-
-    function init() {
-        renderJobs(); // Render job cards
-        updateStats(); // Update statistics display
+display
         renderTimeline(); // Render recent jobs timeline
         setupEventListeners(); // Set up all event listeners
         initChart(); // Initialize status chart
