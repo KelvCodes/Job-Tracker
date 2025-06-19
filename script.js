@@ -1,5 +1,4 @@
-));
-        statusFilter.addEventListener("change", () => renderJobs());
+
         sortSelect.addEventListener("change", () => renderJobs());
         
         // Trigger job search on button click or Enter key
