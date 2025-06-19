@@ -1,5 +1,4 @@
-
-    // Initialize jobs array from localStorage or empty array if none exists
+ty array if none exists
     let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
     let statusChart = null; // Chart.js instance for status visualization
     let currentTab = 0; // Current tab index for tab navigation
