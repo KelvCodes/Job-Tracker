@@ -1,6 +1,4 @@
-display
-        renderTimeline(); // Render recent jobs timeline
-        setupEventListeners(); // Set up all event listeners
+
         initChart(); // Initialize status chart
         checkThemePreference(); // Apply saved or system theme
         fetchDefaultJobs(); // Load default job listings
