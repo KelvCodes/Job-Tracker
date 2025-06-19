@@ -1,10 +1,6 @@
 
            ex;
-                updateTabs();
-            });
-        });
-    }
-    
+
     // Debounce function to prevent rapid event firing
     function debounce(func, wait) {
         let timeout;
