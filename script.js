@@ -1,7 +1,4 @@
-tay = "none";
-            if (e.target === detailsModal) detailsModal.style.display = "none";
-        });
-        
+
         // Handle job form submission
         jobForm.addEventListener("submit", handleFormSubmit);
         
