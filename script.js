@@ -1,9 +1,4 @@
 
-
-            if (e.key === "Enter") searchJobs();
-        });
-        
-        // Toggle theme when clicking theme toggle button
         themeToggle.addEventListener("click", toggleTheme);
         
         // Refresh statistics and animate them
