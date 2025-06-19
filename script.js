@@ -1,97 +1,251 @@
-ue;
-        const interviewDate = document.getElementById("interviewDate").value;
-        const interviewType = document.getElementById("interviewType").value;
-        const interviewPrep = document.getElementById("interviewPrep").value;
-        const interviewFeedback = document.getElementById("interviewFeedback").value;
+// Wait for the entire Document Object Model (DOM) to be fully loaded before executing any script logic
+document.addEventListener("DOMContentLoaded", function() {
+    // DOM Element References: Store references to various user interface elements for interaction
+    const jobCardContainer = document.getElementById("jobContainer"); // Container element for displaying job cards
+    const jobApplicationForm = document.getElementById("jobForm"); // Form for adding or editing job applications
+    const jobFormModal = document.getElementById("jobModal"); // Modal window for the job application form
+    const jobDetailsModal = document.getElementById("detailsModal"); // Modal window for viewing job details
+    const modalCloseButtons = document.querySelectorAll(".close-btn"); // Buttons to close modal windows
+    const addNewJobButton = document.getElementById("addJobBtn"); // Button to open the job application form
+    const jobSearchInput = document.getElementById("search"); // Input field for filtering job applications
+    const jobStatusFilter = document.getElementById("statusFilter"); // Dropdown to filter jobs by status
+    const jobSortSelection = document.getElementById("sort"); // Dropdown to sort job applications
+    const externalJobSearchInput = document.getElementById("jobSearch"); // Input for searching external job listings
+    const externalSearchButton = document.getElementById("searchBtn"); // Button to trigger external job search
+    const externalSearchResultsContainer = document.getElementById("searchResults"); // Container for external job search results
+    const themeToggleButton = document.getElementById("themeToggle"); // Button to toggle between light and dark themes
+    const refreshStatisticsButton = document.getElementById("refreshStats"); // Button to refresh application statistics
+    const jobTimelineContainer = document.getElementById("timeline"); // Container for displaying recent job timeline
+    const previousTabButton = document.getElementById("prevTab"); // Button to navigate to the previous tab
+    const nextTabButton = document.getElementById("nextTab"); // Button to navigate to the next tab
+    const navigationTabs = document.querySelectorAll(".tab"); // Elements for tab navigation
+    const tabContentSections = document.querySelectorAll(".tab-content"); // Content sections corresponding to each tab
+    
+    // Statistics Display Elements: Elements to show job application statistics
+    const totalApplicationsElement = document.getElementById("total-apps"); // Displays total number of applications
+    const activeApplicationsElement = document.getElementById("active-apps"); // Displays active applications count
+    const interviewStageApplicationsElement = document.getElementById("interview-apps"); // Displays applications in interview stage
+    const offerStageApplicationsElement = document.getElementById("offer-apps"); // Displays applications with offers
+    
+    // Application State: Initialize data and state variables
+    let jobApplications = JSON.parse(localStorage.getItem("jobs")) || []; // Load jobs from localStorage or initialize empty array
+    let statusVisualizationChart = null; // Chart.js instance for visualizing application status distribution
+    let currentActiveTabIndex = 0; // Tracks the currently active tab index for navigation
+    
+    // Initialize the application by setting up all necessary components
+    initializeApplication();
+    
+    // Main initialization function to set up the application
+    function initializeApplication() {
+        renderJobApplicationCards(); // Render all job application cards
+        updateApplicationStatistics(); // Update the statistics display
+        renderRecentApplicationsTimeline(); // Render the timeline of recent applications
+        setupAllEventListeners(); // Attach event listeners to interactive elements
+        initializeStatusChart(); // Initialize the Chart.js status visualization
+        applyThemePreference(); // Apply saved or system-preferred theme
+        fetchDefaultJobListings(); // Load default external job listings
+    }
+    
+    // Attach event listeners to all interactive elements
+    function setupAllEventListeners() {
+        // Open the job application form modal when the "Add Job" button is clicked
+        addNewJobButton.addEventListener("click", () => {
+            jobFormModal.style.display = "block";
+            document.getElementById("jobTitle").focus(); // Set focus to the job title input field
+        });
         
-        // Validate required fields
-        if (!jobTitle || !company) {
-            showNotification("Please fill in required fields (Job Title and Company)", "error");
+        // Close modal windows when any close button is clicked
+        modalCloseButtons.forEach(button => button.addEventListener("click", closeAllModals));
+        
+        // Close modals when clicking outside their content area
+        window.addEventListener("click", (event) => {
+            if (event.target === jobFormModal) jobFormModal.style.display = "none";
+            if (event.target === jobDetailsModal) jobDetailsModal.style.display = "none";
+        });
+        
+        // Handle submission of the job application form
+        jobApplicationForm.addEventListener("submit", handleJobFormSubmission);
+        
+        // Filter and sort job applications when search input, status filter, or sort selection changes
+        jobSearchInput.addEventListener("input", debounce(() => renderJobApplicationCards(), 300));
+        jobStatusFilter.addEventListener("change", () => renderJobApplicationCards());
+        jobSortSelection.addEventListener("change", () => renderJobApplicationCards());
+        
+        // Trigger external job search when the search button is clicked or Enter key is pressed
+        externalSearchButton.addEventListener("click", searchExternalJobListings);
+        externalJobSearchInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") searchExternalJobListings();
+        });
+        
+        // Toggle between light and dark themes when the theme toggle button is clicked
+        themeToggleButton.addEventListener("click", toggleApplicationTheme);
+        
+        // Refresh statistics and animate them when the refresh button is clicked
+        refreshStatisticsButton.addEventListener("click", () => {
+            updateApplicationStatistics();
+            animateStatisticsDisplay();
+        });
+        
+        // Navigate tabs using previous and next buttons
+        previousTabButton.addEventListener("click", () => switchTabNavigation(-1));
+        nextTabButton.addEventListener("click", () => switchTabNavigation(1));
+        
+        // Switch to a specific tab when clicked
+        navigationTabs.forEach((tab, index) => {
+            tab.addEventListener("click", () => {
+                currentActiveTabIndex = index;
+                updateTabDisplay();
+            });
+        });
+    }
+    
+    // Debounce function to limit the frequency of event handler execution
+    function debounce(callbackFunction, waitTimeInMs) {
+        let timeoutId;
+        return function executedCallback(...args) {
+            const executeLater = () => {
+                clearTimeout(timeoutId);
+                callbackFunction(...args);
+            };
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(executeLater, waitTimeInMs);
+        };
+    }
+    
+    // Switch tabs by incrementing or decrementing the current tab index
+    function switchTabNavigation(direction) {
+        currentActiveTabIndex += direction;
+        if (currentActiveTabIndex < 0) currentActiveTabIndex = 0; // Prevent negative tab index
+        if (currentActiveTabIndex >= navigationTabs.length) currentActiveTabIndex = navigationTabs.length - 1; // Prevent index overflow
+        updateTabDisplay();
+    }
+    
+    // Update the visibility of tabs and their content
+    function updateTabDisplay() {
+        navigationTabs.forEach((tab, index) => {
+            tab.classList.toggle("active", index === currentActiveTabIndex);
+        });
+        tabContentSections.forEach((content, index) => {
+            content.classList.toggle("active", index === currentActiveTabIndex);
+        });
+    }
+    
+    // Close all modal windows and reset the form
+    function closeAllModals() {
+        jobFormModal.style.display = "none";
+        jobDetailsModal.style.display = "none";
+        currentActiveTabIndex = 0;
+        updateTabDisplay();
+        jobApplicationForm.reset();
+    }
+    
+    // Handle the submission of the job application form
+    async function handleJobFormSubmission(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+        
+        // Retrieve values from form input fields
+        const jobTitleInput = document.getElementById("jobTitle").value.trim();
+        const companyNameInput = document.getElementById("company").value.trim();
+        const applicationDateInput = document.getElementById("applicationDate").value;
+        const jobStatusInput = document.getElementById("status").value;
+        const jobPriorityInput = document.getElementById("priority").value;
+        const jobPostingUrlInput = document.getElementById("jobUrl").value;
+        const jobLocationInput = document.getElementById("location").value;
+        const jobSalaryInput = document.getElementById("salary").value;
+        const jobNotesInput = document.getElementById("notes").value;
+        const interviewDateInput = document.getElementById("interviewDate").value;
+        const interviewTypeInput = document.getElementById("interviewType").value;
+        const interviewPreparationInput = document.getElementById("interviewPrep").value;
+        const interviewFeedbackInput = document.getElementById("interviewFeedback").value;
+        
+        // Validate required fields (Job Title and Company)
+        if (!jobTitleInput || !companyNameInput) {
+            displayNotificationMessage("Please fill in required fields (Job Title and Company)", "error");
             return;
         }
         
-        // Create new job object
-        const newJob = {
-            id: Date.now().toString(), // Unique ID based on timestamp
-            title: jobTitle,
-            company: company,
-            date: applicationDate || new Date().toISOString().split('T')[0], // Default to today if no date
-            status: status,
-            priority: priority,
-            url: jobUrl,
-            location: location,
-            salary: salary,
-            notes: notes,
+        // Create a new job application object
+        const newJobApplication = {
+            id: Date.now().toString(), // Generate a unique ID using current timestamp
+            title: jobTitleInput,
+            company: companyNameInput,
+            date: applicationDateInput || new Date().toISOString().split('T')[0], // Use today's date if none provided
+            status: jobStatusInput,
+            priority: jobPriorityInput,
+            url: jobPostingUrlInput,
+            location: jobLocationInput,
+            salary: jobSalaryInput,
+            notes: jobNotesInput,
             interview: {
-                date: interviewDate,
-                type: interviewType,
-                prep: interviewPrep,
-                feedback: interviewFeedback
+                date: interviewDateInput,
+                type: interviewTypeInput,
+                prep: interviewPreparationInput,
+                feedback: interviewFeedbackInput
             },
             createdAt: new Date().toISOString()
         };
         
-        // Add job to array and save
-        jobs.push(newJob);
-        saveJobs();
-        renderJobs();
-        renderTimeline();
-        updateStats();
-        animateStats();
-        jobForm.reset();
-        jobModal.style.display = "none";
+        // Add the new job application to the array and persist it
+        jobApplications.push(newJobApplication);
+        saveJobApplications();
+        renderJobApplicationCards();
+        renderRecentApplicationsTimeline();
+        updateApplicationStatistics();
+        animateStatisticsDisplay();
+        jobApplicationForm.reset();
+        jobFormModal.style.display = "none";
         
-        showNotification("Application added successfully!", "success");
+        displayNotificationMessage("Application added successfully!", "success");
     }
     
-    // Save jobs array to localStorage
-    function saveJobs() {
-        localStorage.setItem("jobs", JSON.stringify(jobs));
+    // Persist the job applications array to localStorage
+    function saveJobApplications() {
+        localStorage.setItem("jobs", JSON.stringify(jobApplications));
     }
     
-    // Render job cards based on filters and sorting
-    function renderJobs() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const statusFilterValue = statusFilter.value;
-        const sortValue = sortSelect.value;
+    // Render job application cards based on current filters and sorting
+    function renderJobApplicationCards() {
+        const searchQuery = jobSearchInput.value.toLowerCase();
+        const selectedStatusFilter = jobStatusFilter.value;
+        const selectedSortOption = jobSortSelection.value;
         
-        // Filter jobs based on search term and status
-        let filteredJobs = jobs.filter(job => {
-            const matchesSearch = job.title.toLowerCase().includes(searchTerm) || 
-                                 job.company.toLowerCase().includes(searchTerm) ||
-                                 (job.location && job.location.toLowerCase().includes(searchTerm));
-            const matchesStatus = statusFilterValue === "all" || job.status === statusFilterValue;
-            return matchesSearch && matchesStatus;
+        // Filter job applications based on search query and status
+        let filteredJobApplications = jobApplications.filter(job => {
+            const matchesSearchQuery = job.title.toLowerCase().includes(searchQuery) || 
+                                      job.company.toLowerCase().includes(searchQuery) ||
+                                      (job.location && job.location.toLowerCase().includes(searchQuery));
+            const matchesStatusFilter = selectedStatusFilter === "all" || job.status === selectedStatusFilter;
+            return matchesSearchQuery && matchesStatusFilter;
         });
         
-        // Sort jobs based on selected criteria
-        filteredJobs.sort((a, b) => {
-            switch (sortValue) {
+        // Sort filtered job applications based on the selected sort option
+        filteredJobApplications.sort((jobA, jobB) => {
+            switch (selectedSortOption) {
                 case "date-asc":
-                    return new Date(a.date) - new Date(b.date);
+                    return new Date(jobA.date) - new Date(jobB.date);
                 case "title":
-                    return a.title.localeCompare(b.title);
+                    return jobA.title.localeCompare(jobB.title);
                 case "company":
-                    return a.company.localeCompare(b.company);
+                    return jobA.company.localeCompare(jobB.company);
                 case "salary":
-                    return extractSalary(b) - extractSalary(a);
+                    return extractNumericalSalary(jobB) - extractNumericalSalary(jobA);
                 default:
-                    return new Date(b.date) - new Date(a.date); // Default: date descending
+                    return new Date(jobB.date) - new Date(jobA.date); // Default to newest first
             }
         });
         
-        // Extract numerical salary for sorting
-        function extractSalary(job) {
+        // Helper function to extract numerical salary for sorting
+        function extractNumericalSalary(job) {
             if (!job.salary) return 0;
-            const match = job.salary.match(/\$?(\d{1,3}(?:,\d{3})*(?:\.\d{2})?)/);
-            return match ? parseFloat(match[1].replace(/,/g, '')) : 0;
+            const salaryMatch = job.salary.match(/\$?(\d{1,3}(?:,\d{3})*(?:\.\d{2})?)/);
+            return salaryMatch ? parseFloat(salaryMatch[1].replace(/,/g, '')) : 0;
         }
         
-        jobContainer.innerHTML = "";
+        jobCardContainer.innerHTML = "";
         
-        // Display message if no jobs match filters
-        if (filteredJobs.length === 0) {
-            jobContainer.innerHTML = `
+        // Display a message if no job applications match the filters
+        if (filteredJobApplications.length === 0) {
+            jobCardContainer.innerHTML = `
                 <div class="no-jobs">
                     <i class="fas fa-briefcase"></i>
                     <h4>No applications tracked yet</h4>
@@ -104,36 +258,36 @@ ue;
             return;
         }
         
-        // Create and append job cards
-        filteredJobs.forEach(job => {
-            const jobCard = document.createElement("div");
-            jobCard.className = `job-card job-${job.status.toLowerCase()}`;
-            jobCard.innerHTML = `
+        // Create and append job application cards to the container
+        filteredJobApplications.forEach(job => {
+            const jobCardElement = document.createElement("div");
+            jobCardElement.className = `job-card job-${job.status.toLowerCase()}`;
+            jobCardElement.innerHTML = `
                 <h3>${job.title}</h3>
                 <div class="job-company">${job.company}</div>
                 <div class="job-meta">
-                    <span class="job-date">${formatDate(job.date)}</span>
+                    <span class="job-date">${formatDisplayDate(job.date)}</span>
                     <span class="job-status job-${job.status.toLowerCase()}">${job.status}</span>
                 </div>
                 ${job.priority ? `<div class="job-priority priority-${job.priority.toLowerCase()}">${job.priority} Priority</div>` : ''}
                 ${job.location ? `<div class="job-location"><i class="fas fa-map-marker-alt"></i> ${job.location}</div>` : ''}
                 <div class="job-actions">
-                    <button class="action-btn view-btn" onclick="viewJobDetails('${job.id}')">
+                    <button class="action-btn view-btn" onclick="viewJobApplicationDetails('${job.id}')">
                         <i class="fas fa-eye"></i> View
                     </button>
-                    <button class="action-btn edit-btn" onclick="editJob('${job.id}')">
+                    <button class="action-btn edit-btn" onclick="editJobApplication('${job.id}')">
                         <i class="fas fa-edit"></i> Edit
                     </button>
-                    <button class="action-btn delete-btn" onclick="deleteJob('${job.id}')">
+                    <button class="action-btn delete-btn" onclick="deleteJobApplication('${job.id}')">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
             `;
-            jobContainer.appendChild(jobCard);
+            jobCardContainer.appendChild(jobCardElement);
             
-            // Animate job card appearance
+            // Animate the appearance of the job card
             anime({
-                targets: jobCard,
+                targets: jobCardElement,
                 opacity: [0, 1],
                 translateY: [20, 0],
                 duration: 300,
@@ -142,68 +296,68 @@ ue;
         });
     }
     
-    // Render timeline of recent jobs
-    function renderTimeline() {
-        const recentJobs = [...jobs]
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .slice(0, 5); // Get 5 most recent jobs
+    // Render a timeline of the most recent job applications
+    function renderRecentApplicationsTimeline() {
+        const recentApplications = [...jobApplications]
+            .sort((jobA, jobB) => new Date(jobB.date) - new Date(jobA.date))
+            .slice(0, 5); // Select the 5 most recent applications
         
-        timeline.innerHTML = "";
+        jobTimelineContainer.innerHTML = "";
         
-        // Display message if no recent jobs
-        if (recentJobs.length === 0) {
-            timeline.innerHTML = `<div class="no-timeline">No recent applications to show</div>`;
+        // Display a message if there are no recent applications
+        if (recentApplications.length === 0) {
+            jobTimelineContainer.innerHTML = `<div class="no-timeline">No recent applications to show</div>`;
             return;
         }
         
-        // Create timeline items
-        recentJobs.forEach(job => {
-            const timelineItem = document.createElement("div");
-            timelineItem.className = `timeline-item ${job.status.toLowerCase()}`;
-            timelineItem.innerHTML = `
-                <div class="timeline-date">${formatDate(job.date)}</div>
+        // Create and append timeline items
+        recentApplications.forEach(job => {
+            const timelineItemElement = document.createElement("div");
+            timelineItemElement.className = `timeline-item ${job.status.toLowerCase()}`;
+            timelineItemElement.innerHTML = `
+                <div class="timeline-date">${formatDisplayDate(job.date)}</div>
                 <div class="timeline-content">
                     <div class="timeline-title">${job.title}</div>
                     <div class="timeline-company">${job.company}</div>
                     <div class="timeline-status">Status: ${job.status}</div>
                 </div>
             `;
-            timeline.appendChild(timelineItem);
+            jobTimelineContainer.appendChild(timelineItemElement);
         });
     }
     
-    // Format date for display
-    function formatDate(dateString) {
+    // Format a date string for display purposes
+    function formatDisplayDate(dateString) {
         if (!dateString) return "Not specified";
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString(undefined, options);
+        const dateFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, dateFormatOptions);
     }
     
-    // Update statistics display
-    function updateStats() {
-        totalAppsEl.textContent = jobs.length;
-        activeAppsEl.textContent = jobs.filter(j => !["Rejected", "Offer"].includes(j.status)).length;
-        interviewAppsEl.textContent = jobs.filter(j => j.status === "Interview").length;
-        offerAppsEl.textContent = jobs.filter(j => j.status === "Offer").length;
+    // Update the display of application statistics
+    function updateApplicationStatistics() {
+        totalApplicationsElement.textContent = jobApplications.length;
+        activeApplicationsElement.textContent = jobApplications.filter(job => !["Rejected", "Offer"].includes(job.status)).length;
+        interviewStageApplicationsElement.textContent = jobApplications.filter(job => job.status === "Interview").length;
+        offerStageApplicationsElement.textContent = jobApplications.filter(job => job.status === "Offer").length;
         
-        // Update progress bars
-        document.querySelectorAll('.stat-progress').forEach((el, index) => {
-            const values = [
-                jobs.length,
-                jobs.filter(j => !["Rejected", "Offer"].includes(j.status)).length,
-                jobs.filter(j => j.status === "Interview").length,
-                jobs.filter(j => j.status === "Offer").length
+        // Update progress bars for statistics
+        document.querySelectorAll('.stat-progress').forEach((progressElement, index) => {
+            const statisticValues = [
+                jobApplications.length,
+                jobApplications.filter(job => !["Rejected", "Offer"].includes(job.status)).length,
+                jobApplications.filter(job => job.status === "Interview").length,
+                jobApplications.filter(job => job.status === "Offer").length
             ];
-            const maxValue = Math.max(...values.filter(v => !isNaN(v)), 1);
-            const percentage = (values[index] / maxValue) * 100;
-            el.style.setProperty('--progress-width', `${percentage}%`);
+            const maxStatisticValue = Math.max(...statisticValues.filter(value => !isNaN(value)), 1);
+            const progressPercentage = (statisticValues[index] / maxStatisticValue) * 100;
+            progressElement.style.setProperty('--progress-width', `${progressPercentage}%`);
         });
         
-        updateChart();
+        updateStatusChart();
     }
     
-    // Animate statistics display
-    function animateStats() {
+    // Animate the statistics display for visual feedback
+    function animateStatisticsDisplay() {
         anime({
             targets: '.stat',
             scale: [1, 1.05, 1],
@@ -212,18 +366,18 @@ ue;
         });
         anime({
             targets: '.stat-progress',
-            width: (el) => el.style.getPropertyValue('--progress-width'),
+            width: (element) => element.style.getPropertyValue('--progress-width'),
             duration: 800,
             easing: 'easeOutQuad'
         });
     }
     
-    // Initialize Chart.js doughnut chart
-    function initChart() {
-        const ctx = document.getElementById('statusChart').getContext('2d');
-        statusChart = new Chart(ctx, {
+    // Initialize the Chart.js doughnut chart for status visualization
+    function initializeStatusChart() {
+        const chartContext = document.getElementById('statusChart').getContext('2d');
+        statusVisualizationChart = new Chart(chartContext, {
             type: 'doughnut',
-            data: getChartData(),
+            data: prepareChartData(),
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -255,21 +409,21 @@ ue;
         });
     }
     
-    // Update chart data
-    function updateChart() {
-        if (statusChart) {
-            statusChart.data = getChartData();
-            statusChart.options.plugins.legend.labels.color = 
+    // Update the data in the status chart
+    function updateStatusChart() {
+        if (statusVisualizationChart) {
+            statusVisualizationChart.data = prepareChartData();
+            statusVisualizationChart.options.plugins.legend.labels.color = 
                 document.body.classList.contains('light-mode') 
                 ? 'rgba(0, 0, 0, 0.8)' 
                 : 'rgba(255, 255, 255, 0.8)';
-            statusChart.update();
+            statusVisualizationChart.update();
         }
     }
     
-    // Prepare data for status chart
-    function getChartData() {
-        const statusCounts = {
+    // Prepare data for the status visualization chart
+    function prepareChartData() {
+        const statusCountMap = {
             Saved: 0,
             Applied: 0,
             Interview: 0,
@@ -277,14 +431,14 @@ ue;
             Rejected: 0
         };
         
-        jobs.forEach(job => {
-            statusCounts[job.status]++;
+        jobApplications.forEach(job => {
+            statusCountMap[job.status]++;
         });
         
         return {
-            labels: Object.keys(statusCounts),
+            labels: Object.keys(statusCountMap),
             datasets: [{
-                data: Object.values(statusCounts),
+                data: Object.values(statusCountMap),
                 backgroundColor: [
                     'rgba(156, 39, 176, 0.8)',
                     'rgba(33, 150, 243, 0.8)',
@@ -305,14 +459,14 @@ ue;
         };
     }
     
-    // Search for external job listings
-    async function searchJobs() {
-        const query = jobSearch.value.trim();
-        const location = document.getElementById("searchLocation").value;
-        const type = document.getElementById("searchType").value;
+    // Search for external job listings based on user input
+    async function searchExternalJobListings() {
+        const searchQuery = externalJobSearchInput.value.trim();
+        const searchLocation = document.getElementById("searchLocation").value;
+        const searchJobType = document.getElementById("searchType").value;
         
-        // Show loading indicator
-        searchResults.innerHTML = `
+        // Display a loading indicator while fetching job listings
+        externalSearchResultsContainer.innerHTML = `
             <div class="search-loading">
                 <div class="loading-spinner"></div>
                 <p>Searching for jobs...</p>
@@ -320,11 +474,11 @@ ue;
         `;
         
         try {
-            const results = await fetchJobVacancies(query, location, type);
-            displaySearchResults(results);
+            const jobSearchResults = await fetchExternalJobVacancies(searchQuery, searchLocation, searchJobType);
+            displayExternalSearchResults(jobSearchResults);
         } catch (error) {
-            showNotification("Failed to fetch job listings. Please try again.", "error");
-            searchResults.innerHTML = `
+            displayNotificationMessage("Failed to fetch job listings. Please try again.", "error");
+            externalSearchResultsContainer.innerHTML = `
                 <div class="no-results">
                     <i class="fas fa-exclamation-circle"></i>
                     <h4>Error fetching jobs</h4>
@@ -334,9 +488,9 @@ ue;
         }
     }
     
-    // Fetch default job listings
-    async function fetchDefaultJobs() {
-        searchResults.innerHTML = `
+    // Fetch default job listings to display on initial load
+    async function fetchDefaultJobListings() {
+        externalSearchResultsContainer.innerHTML = `
             <div class="search-loading">
                 <div class="loading-spinner"></div>
                 <p>Loading featured jobs...</p>
@@ -344,11 +498,11 @@ ue;
         `;
         
         try {
-            const results = await fetchJobVacancies("", "", "");
-            displaySearchResults(results);
+            const defaultJobResults = await fetchExternalJobVacancies("", "", "");
+            displayExternalSearchResults(defaultJobResults);
         } catch (error) {
-            showNotification("Failed to load featured jobs.", "error");
-            searchResults.innerHTML = `
+            displayNotificationMessage("Failed to load featured jobs.", "error");
+            externalSearchResultsContainer.innerHTML = `
                 <div class="no-results">
                     <i class="fas fa-exclamation-circle"></i>
                     <h4>Error loading jobs</h4>
@@ -358,10 +512,10 @@ ue;
         }
     }
     
-    // Mock API to fetch job vacancies
-    async function fetchJobVacancies(query, location, type) {
-        // Mock job listings data
-        const jobListings = [
+    // Mock API function to fetch external job vacancies
+    async function fetchExternalJobVacancies(query, location, type) {
+        // Mock job listings data for demonstration purposes
+        const mockJobListings = [
             {
                 title: "Senior Software Engineer",
                 company: "TechTrend Innovations",
@@ -434,35 +588,35 @@ ue;
             }
         ];
         
-        // Simulate API delay
+        // Simulate a network delay for the mock API
         await new Promise(resolve => setTimeout(resolve, 800));
         
-        // Filter jobs based on query, location, and type
-        return jobListings.filter(job => {
-            const matchesQuery = !query || 
+        // Filter job listings based on query, location, and job type
+        return mockJobListings.filter(job => {
+            const matchesSearchQuery = !query || 
                 job.title.toLowerCase().includes(query.toLowerCase()) || 
                 job.company.toLowerCase().includes(query.toLowerCase()) ||
                 job.description.toLowerCase().includes(query.toLowerCase());
-            const matchesLocation = !location || 
+            const matchesLocationFilter = !location || 
                 job.location.toLowerCase().includes(location.toLowerCase());
-            const matchesType = !type || 
+            const matchesJobTypeFilter = !type || 
                 job.type.toLowerCase().includes(type.toLowerCase());
-            return matchesQuery && matchesLocation && matchesType;
+            return matchesSearchQuery && matchesLocationFilter && matchesJobTypeFilter;
         });
     }
     
-    // Display external job search results
-    function displaySearchResults(results) {
-        searchResults.innerHTML = "";
+    // Display the results of an external job search
+    function displayExternalSearchResults(searchResults) {
+        externalSearchResultsContainer.innerHTML = "";
         
-        // Display message if no results found
-        if (results.length === 0) {
-            searchResults.innerHTML = `
+        // Display a message if no search results are found
+        if (searchResults.length === 0) {
+            externalSearchResultsContainer.innerHTML = `
                 <div class="no-results">
                     <i class="fas fa-search"></i>
                     <h4>No jobs found</h4>
                     <p>Try different keywords or clear filters</p>
-                    <button class="gradient-btn primary-btn" onclick="fetchDefaultJobs()">
+                    <button class="gradient-btn primary-btn" onclick="fetchDefaultJobListings()">
                         <i class="fas fa-sync"></i> Show Featured Jobs
                     </button>
                 </div>
@@ -470,27 +624,27 @@ ue;
             return;
         }
         
-        // Display search results with action buttons
-        searchResults.innerHTML = `
+        // Render search results with action buttons
+        externalSearchResultsContainer.innerHTML = `
             <div class="search-header">
-                <h3>Available Jobs (${results.length})</h3>
-                <button class="gradient-btn secondary-btn" onclick="fetchDefaultJobs()">
+                <h3>Available Jobs (${searchResults.length})</h3>
+                <button class="gradient-btn secondary-btn" onclick="fetchDefaultJobListings()">
                     <i class="fas fa-sync"></i> Refresh
                 </button>
             </div>
-            ${results.map(job => `
+            ${searchResults.map(job => `
                 <div class="search-result">
                     <h4>${job.title}</h4>
                     <div class="result-meta">
                         <span class="company">${job.company}</span>
                         <span class="location"><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
                         <span class="type"><i class="fas fa-clock"></i> ${job.type}</span>
-                        <span class="posted"><i class="fas fa-calendar"></i> Posted ${formatDate(job.posted)}</span>
+                        <span class="posted"><i class="fas fa-calendar"></i> Posted ${formatDisplayDate(job.posted)}</span>
                         ${job.salary ? `<span class="salary"><i class="fas fa-dollar-sign"></i> ${job.salary}</span>` : ''}
                     </div>
                     <p class="description">${job.description}</p>
                     <div class="result-actions">
-                        <button class="gradient-btn primary-btn small-btn" onclick="addJobFromSearch('${job.title.replace(/'/g, "\\'")}', '${job.company.replace(/'/g, "\\'")}', '${job.location.replace(/'/g, "\\'")}', '${job.url.replace(/'/g, "\\'")}', '${job.salary ? job.salary.replace(/'/g, "\\'") : ''}')">
+                        <button class="gradient-btn primary-btn small-btn" onclick="addJobApplicationFromSearch('${job.title.replace(/'/g, "\\'")}', '${job.company.replace(/'/g, "\\'")}', '${job.location.replace(/'/g, "\\'")}', '${job.url.replace(/'/g, "\\'")}', '${job.salary ? job.salary.replace(/'/g, "\\'") : ''}')">
                             <i class="fas fa-plus"></i> Track Application
                         </button>
                         <a href="${job.url}" target="_blank" class="secondary-btn small-btn">
@@ -501,7 +655,7 @@ ue;
             `).join("")}
         `;
         
-        // Animate search results
+        // Animate the appearance of search result cards
         anime({
             targets: '.search-result',
             opacity: [0, 1],
@@ -511,139 +665,139 @@ ue;
         });
     }
     
-    // Show notification messages
-    function showNotification(message, type) {
-        const notification = document.createElement("div");
-        notification.className = `notification ${type}`;
-        notification.innerHTML = `
-            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-            ${message}
+    // Display a notification message to the user
+    function displayNotificationMessage(messageText, messageType) {
+        const notificationElement = document.createElement("div");
+        notificationElement.className = `notification ${messageType}`;
+        notificationElement.innerHTML = `
+            <i class="fas fa-${messageType === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            ${messageText}
         `;
-        document.body.appendChild(notification);
+        document.body.appendChild(notificationElement);
         
-        // Animate notification appearance and disappearance
+        // Animate the notification's appearance and disappearance
         setTimeout(() => {
-            notification.classList.add("show");
+            notificationElement.classList.add("show");
             setTimeout(() => {
-                notification.classList.remove("show");
+                notificationElement.classList.remove("show");
                 setTimeout(() => {
-                    document.body.removeChild(notification);
+                    document.body.removeChild(notificationElement);
                 }, 300);
             }, 3000);
         }, 10);
     }
     
     // Toggle between light and dark themes
-    function toggleTheme() {
+    function toggleApplicationTheme() {
         document.body.classList.toggle("light-mode");
-        const isLightMode = document.body.classList.contains("light-mode");
-        localStorage.setItem("theme", isLightMode ? "light" : "dark");
-        themeToggle.innerHTML = isLightMode ? `<i class="fas fa-sun"></i>` : `<i class="fas fa-moon"></i>`;
-        updateChart();
+        const isLightModeActive = document.body.classList.contains("light-mode");
+        localStorage.setItem("theme", isLightModeActive ? "light" : "dark");
+        themeToggleButton.innerHTML = isLightModeActive ? `<i class="fas fa-sun"></i>` : `<i class="fas fa-moon"></i>`;
+        updateStatusChart();
     }
     
-    // Apply saved or system-preferred theme
-    function checkThemePreference() {
-        const savedTheme = localStorage.getItem("theme") || 
-                          (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? "light" : "dark");
-        if (savedTheme === "light") {
+    // Apply the saved or system-preferred theme
+    function applyThemePreference() {
+        const savedThemePreference = localStorage.getItem("theme") || 
+                                    (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? "light" : "dark");
+        if (savedThemePreference === "light") {
             document.body.classList.add("light-mode");
-            themeToggle.innerHTML = `<i class="fas fa-sun"></i>`;
+            themeToggleButton.innerHTML = `<i class="fas fa-sun"></i>`;
         } else {
-            themeToggle.innerHTML = `<i class="fas fa-moon"></i>`;
+            themeToggleButton.innerHTML = `<i class="fas fa-moon"></i>`;
         }
     }
     
-    // View job details in modal
-    window.viewJobDetails = function(jobId) {
-        const job = jobs.find(j => j.id === jobId);
-        if (!job) return;
+    // View detailed information about a job application
+    window.viewJobApplicationDetails = function(applicationId) {
+        const selectedJob = jobApplications.find(job => job.id === applicationId);
+        if (!selectedJob) return;
         
-        const detailsContent = document.getElementById("jobDetailsContent");
-        detailsContent.innerHTML = `
-            <h2>${job.title}</h2>
+        const detailsContentContainer = document.getElementById("jobDetailsContent");
+        detailsContentContainer.innerHTML = `
+            <h2>${selectedJob.title}</h2>
             <div class="detail-row">
                 <div class="detail-label">Company</div>
-                <div class="detail-value">${job.company}</div>
+                <div class="detail-value">${selectedJob.company}</div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Application Date</div>
-                <div class="detail-value">${formatDate(job.date)}</div>
+                <div class="detail-value">${formatDisplayDate(selectedJob.date)}</div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Status</div>
-                <div class="detail-value"><span class="job-status job-${job.status.toLowerCase()}">${job.status}</span></div>
+                <div class="detail-value"><span class="job-status job-${selectedJob.status.toLowerCase()}">${selectedJob.status}</span></div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Priority</div>
-                <div class="detail-value"><span class="job-priority priority-${job.priority.toLowerCase()}">${job.priority}</span></div>
+                <div class="detail-value"><span class="job-priority priority-${selectedJob.priority.toLowerCase()}">${selectedJob.priority}</span></div>
             </div>
-            ${job.location ? `
+            ${selectedJob.location ? `
             <div class="detail-row">
                 <div class="detail-label">Location</div>
-                <div class="detail-value"><i class="fas fa-map-marker-alt"></i> ${job.location}</div>
+                <div class="detail-value"><i class="fas fa-map-marker-alt"></i> ${selectedJob.location}</div>
             </div>
             ` : ''}
-            ${job.salary ? `
+            ${selectedJob.salary ? `
             <div class="detail-row">
                 <div class="detail-label">Salary Range</div>
-                <div class="detail-value"><i class="fas fa-dollar-sign"></i> ${job.salary}</div>
+                <div class="detail-value"><i class="fas fa-dollar-sign"></i> ${selectedJob.salary}</div>
             </div>
             ` : ''}
-            ${job.url ? `
+            ${selectedJob.url ? `
             <div class="detail-row">
                 <div class="detail-label">Job Posting</div>
-                <div class="detail-value"><a href="${job.url}" target="_blank"><i class="fas fa-external-link-alt"></i> View Original Posting</a></div>
+                <div class="detail-value"><a href="${selectedJob.url}" target="_blank"><i class="fas fa-external-link-alt"></i> View Original Posting</a></div>
             </div>
             ` : ''}
             <div class="detail-row">
                 <div class="detail-label">Notes</div>
-                <div class="detail-value">${job.notes || "No notes added"}</div>
+                <div class="detail-value">${selectedJob.notes || "No notes added"}</div>
             </div>
-            ${job.interview.date || job.interview.type ? `
+            ${selectedJob.interview.date || selectedJob.interview.type ? `
             <div class="detail-section">
                 <h3><i class="fas fa-calendar-alt"></i> Interview Details</h3>
-                ${job.interview.date ? `
+                ${selectedJob.interview.date ? `
                 <div class="detail-row">
                     <div class="detail-label">Date</div>
-                    <div class="detail-value">${formatDateTime(job.interview.date)}</div>
+                    <div class="detail-value">${formatDateTimeDisplay(selectedJob.interview.date)}</div>
                 </div>
                 ` : ''}
-                ${job.interview.type ? `
+                ${selectedJob.interview.type ? `
                 <div class="detail-row">
                     <div class="detail-label">Type</div>
-                    <div class="detail-value">${job.interview.type}</div>
+                    <div class="detail-value">${selectedJob.interview.type}</div>
                 </div>
                 ` : ''}
-                ${job.interview.prep ? `
+                ${selectedJob.interview.prep ? `
                 <div class="detail-row">
                     <div class="detail-label">Preparation Notes</div>
-                    <div class="detail-value">${job.interview.prep}</div>
+                    <div class="detail-value">${selectedJob.interview.prep}</div>
                 </div>
                 ` : ''}
-                ${job.interview.feedback ? `
+                ${selectedJob.interview.feedback ? `
                 <div class="detail-row">
                     <div class="detail-label">Feedback</div>
-                    <div class="detail-value">${job.interview.feedback}</div>
+                    <div class="detail-value">${selectedJob.interview.feedback}</div>
                 </div>
                 ` : ''}
             </div>
             ` : ''}
             <div class="detail-actions">
-                <button class="gradient-btn primary-btn" onclick="editJob('${job.id}')">
+                <button class="gradient-btn primary-btn" onclick="editJobApplication('${selectedJob.id}')">
                     <i class="fas fa-edit"></i> Edit
                 </button>
-                <button class="secondary-btn" onclick="deleteJob('${job.id}')">
+                <button class="secondary-btn" onclick="deleteJobApplication('${selectedJob.id}')">
                     <i class="fas fa-trash"></i> Delete
                 </button>
             </div>
         `;
         
-        detailsModal.style.display = "block";
+        jobDetailsModal.style.display = "block";
         
-        // Animate modal appearance
+        // Animate the modal's appearance
         anime({
-            targets: detailsModal,
+            targets: jobDetailsModal,
             opacity: [0, 1],
             translateY: [20, 0],
             duration: 300,
@@ -651,61 +805,61 @@ ue;
         });
     };
     
-    // Format datetime for display
-    function formatDateTime(dateTimeString) {
+    // Format a datetime string for display
+    function formatDateTimeDisplay(dateTimeString) {
         if (!dateTimeString) return "";
-        const options = { 
+        const dateTimeFormatOptions = { 
             year: 'numeric', 
             month: 'short', 
             day: 'numeric',
             hour: '2-digit',
             minute: '2-digit'
         };
-        return new Date(dateTimeString).toLocaleDateString(undefined, options);
+        return new Date(dateTimeString).toLocaleDateString(undefined, dateTimeFormatOptions);
     }
     
-    // Edit a job by pre-filling the form
-    window.editJob = function(jobId) {
-        const job = jobs.find(j => j.id === jobId);
-        if (!job) return;
+    // Edit an existing job application by pre-filling the form
+    window.editJobApplication = function(jobId) {
+        const selectedJob = jobApplications.find(job => j.id === jobId');
+        if (!selectedJob) return;
         
-        // Pre-fill form with job details
-        document.getElementById("jobTitle").value = job.title;
-        document.getElementById("company").value = job.company;
-        document.getElementById("applicationDate").value = job.date;
-        document.getElementById("status").value = job.status;
-        document.getElementById("priority").value = job.priority;
-        document.getElementById("jobUrl").value = job.url || "";
-        document.getElementById("location").value = job.location || "";
-        document.getElementById("salary").value = job.salary || "";
-        document.getElementById("notes").value = job.notes || "";
-        document.getElementById("interviewDate").value = job.interview.date || "";
-        document.getElementById("interviewType").value = job.interview.type || "";
-        document.getElementById("interviewPrep").value = job.interview.prep || "";
-        document.getElementById("interviewFeedback").value = job.interview.feedback || "";
+        // Pre-fill the form with the selected job's details
+        document.getElementById("jobTitle").value = selectedJob.title;
+        document.getElementById("company").value = selectedJob.company;
+        document.getElementById("applicationDate").value = selectedJob.date;
+        document.getElementById("status").value = selectedJob.status;
+        document.getElementById("priority").value = selectedJob.priority;
+        document.getElementById("jobUrl").value = selectedJob.url || "";
+        document.getElementById("location").value = selectedJob.location || "";
+        document.getElementById("salary").value = selectedJob.salary || "";
+        document.getElementById("notes").value = selectedJob.notes || "";
+        document.getElementById("interviewDate").value = selectedJob.interview.date || "";
+        document.getElementById("interviewType").value = selectedJob.interview.type || "";
+        document.getElementById("interviewPrep").value = selectedJob.interview.prep || "";
+        document.getElementById("interviewFeedback").value = selectedJob.interview.feedback || "";
         
-        // Remove job from array (will be re-added on form submission)
-        jobs = jobs.filter(j => j.id !== jobId);
+        // Remove the job application from the array (it will be re-added on form submission)
+        jobApplications = jobApplications.filter(job => job.id !== jobId);
         
-        jobModal.style.display = "block";
-        detailsModal.style.display = "none";
+        jobFormModal.style.display = "block";
+        jobDetailsModal.style.display = "none";
     };
     
-    // Delete a job with confirmation
-    window.deleteJob = function(jobId) {
+    // Delete a job application after user confirmation
+    window.deleteJobApplication = function(applicationId) {
         if (confirm("Are you sure you want to delete this application?")) {
-            jobs = jobs.filter(job => job.id !== jobId);
-            saveJobs();
-            renderJobs();
-            renderTimeline();
-            updateStats();
-            closeModals();
-            showNotification("Application deleted", "error");
+            jobApplications = jobApplications.filter(job => job.id !== applicationId);
+            saveJobApplications();
+            renderJobApplicationCards();
+            renderRecentApplicationsTimeline();
+            updateApplicationStatistics();
+            closeAllModals();
+            displayNotificationMessage("Application deleted", "error");
         }
     };
     
-    // Pre-fill form from search results
-    window.addJobFromSearch = function(title, company, location = "", url = "", salary = "") {
+    // Pre-fill the job application form with data from a search result
+    window.addJobApplicationFromSearch = function(title, company, location = "", url = "", salary = "") {
         document.getElementById("jobTitle").value = title;
         document.getElementById("company").value = company;
         if (location) {
@@ -717,14 +871,14 @@ ue;
         if (salary) {
             document.getElementById("salary").value = salary;
         }
-        jobModal.style.display = "block";
-        jobSearch.value = "";
-    };
+        jobFormModal.style.display = "block";
+        externalJobSearchInput.value = "";
+    }
 });
 
-// Enhanced CSS styles
-const style = document.createElement('style');
-style.textContent = `
+// Inject enhanced CSS styles into the document
+const styleElement = document.createElement('style');
+styleElement.textContent = `
 /* Styles for notification messages */
 .notification {
     position: fixed;
@@ -811,38 +965,41 @@ style.textContent = `
 }
 
 /* Styles for loading indicator */
-.search-loading {
-    text-align: center;
-    padding: 30px;
+.job-search-results-loading {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    padding: 20px;
     color: var(--dark-text-secondary);
     background: var(--card-bg);
     border-radius: 8px;
 }
 
 /* Styles for no results message */
-.no-results {
-    text-align: center;
+.no-job-results {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
     padding: 30px;
     background: var(--card-bg);
     border-radius: 8px;
 }
 
-.no-results button {
+.no-job-results button {
     margin-top: 10px;
 }
 
 /* Light mode adjustments */
-body.light-mode .loading-spinner {
-    border-top-color: var(--light-primary);
+@media (prefers-color-scheme: light) {
+    body.light-mode .job-search-results-loading,
+    body.light-mode .no-results {
+        color: var(--light-text-secondary);
+    }
 }
 
-body.light-mode .search-loading,
-body.light-mode .no-results {
-    color: var(--light-text-secondary);
-}
-
-/* Styles for job cards */
-.job-card {
+/* Styles for job application cards */
+.job-application-card {
     position: relative;
     overflow: hidden;
     background: var(--card-bg);
@@ -854,13 +1011,14 @@ body.light-mode .no-results {
 
 .job-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Hover effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Hover effect */
 }
 
 /* Delete button styles */
 .delete-btn {
     background: #ff4444;
     color: white;
+    background-color: white;
     transition: background 0.2s ease;
 }
 
@@ -869,7 +1027,7 @@ body.light-mode .no-results {
 }
 
 /* Job metadata styles */
-.job-meta {
+.job-meta-data {
     display: flex;
     gap: 15px;
     margin: 10px 0;
@@ -891,4 +1049,4 @@ body.light-mode .no-results {
     transition: background 0.2s ease;
 }
 `;
-document.head.appendChild(style);
+document.head.appendChild(styleElement);
