@@ -1,8 +1,5 @@
 
-    
-    // Handle job form submission
-    async function handleFormSubmit(e) {
-        e.preventDefault(); // Prevent default form submission
+   
         
         // Get form input values
         const jobTitle = document.getElementById("jobTitle").value.trim();
