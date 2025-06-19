@@ -1,6 +1,4 @@
-
-        initChart(); // Initialize status chart
-        checkThemePreference(); // Apply saved or system theme
+system theme
         fetchDefaultJobs(); // Load default job listings
     }
     
