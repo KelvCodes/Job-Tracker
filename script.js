@@ -1,8 +1,4 @@
 
-    // Initialize the application
-    init();
-    
-    // Main initialization function
     function init() {
         renderJobs(); // Render job cards
         updateStats(); // Update statistics display
