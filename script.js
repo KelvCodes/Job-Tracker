@@ -1,10 +1,4 @@
-
-
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
+ wait);
         };
     }
     
