@@ -1,9 +1,4 @@
-;
-        const priority = document.getElementById("priority").value;
-        const jobUrl = document.getElementById("jobUrl").value;
-        const location = document.getElementById("location").value;
-        const salary = document.getElementById("salary").value;
-        const notes = document.getElementById("notes").value;
+ue;
         const interviewDate = document.getElementById("interviewDate").value;
         const interviewType = document.getElementById("interviewType").value;
         const interviewPrep = document.getElementById("interviewPrep").value;
