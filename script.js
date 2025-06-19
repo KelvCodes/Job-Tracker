@@ -1,7 +1,4 @@
 
-
-    const detailsModal = document.getElementById("detailsModal"); // Modal for job details
-    const closeBtns = document.querySelectorAll(".close-btn"); // Buttons to close modals
     const addJobBtn = document.getElementById("addJobBtn"); // Button to open job form
     const searchInput = document.getElementById("search"); // Search input for filtering jobs
     const statusFilter = document.getElementById("statusFilter"); // Filter by job status
