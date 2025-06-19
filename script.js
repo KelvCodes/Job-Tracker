@@ -1,7 +1,4 @@
 
-    
-    // Set up event listeners for interactive elements
-    function setupEventListeners() {
         // Open job form modal when clicking "Add Job" button
         addJobBtn.addEventListener("click", () => {
             jobModal.style.display = "block";
