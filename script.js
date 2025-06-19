@@ -1,7 +1,4 @@
-
-    const jobSearch = document.getElementById("jobSearch"); // Input for external job search
-    const searchBtn = document.getElementById("searchBtn"); // Button to trigger job search
-    const searchResults = document.getElementById("searchResults"); // Container for search results
+sults
     const themeToggle = document.getElementById("themeToggle"); // Theme toggle button
     const refreshStats = document.getElementById("refreshStats"); // Button to refresh stats
     const timeline = document.getElementById("timeline"); // Container for job timeline
