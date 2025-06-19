@@ -1,8 +1,7 @@
 
            ex;
 
-    // Debounce function to prevent rapid event firing
-    function debounce(func, wait) {
+
         let timeout;
         return function executedFunction(...args) {
             const later = () => {
