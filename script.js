@@ -1,6 +1,4 @@
-
-        const applicationDate = document.getElementById("applicationDate").value;
-        const status = document.getElementById("status").value;
+;
         const priority = document.getElementById("priority").value;
         const jobUrl = document.getElementById("jobUrl").value;
         const location = document.getElementById("location").value;
