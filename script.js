@@ -1,7 +1,4 @@
-sults
-    const themeToggle = document.getElementById("themeToggle"); // Theme toggle button
-    const refreshStats = document.getElementById("refreshStats"); // Button to refresh stats
-    const timeline = document.getElementById("timeline"); // Container for job timeline
+e
     const prevTabBtn = document.getElementById("prevTab"); // Previous tab button
     const nextTabBtn = document.getElementById("nextTab"); // Next tab button
     const tabs = document.querySelectorAll(".tab"); // Tab navigation elements
