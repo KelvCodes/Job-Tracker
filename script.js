@@ -1,12 +1,5 @@
 
-    
 
-   
-            content.classList.toggle("active", index === currentTab);
-        });
-    }
-    
-    // Close all modals and reset form
     function closeModals() {
         jobModal.style.display = "none";
         detailsModal.style.display = "none";
