@@ -1,10 +1,4 @@
 
-
-    functiosplay = "none";
-        currentTab = 0;
-        updateTabs();
-        jobForm.reset();
-    }
     
     // Handle job form submission
     async function handleFormSubmit(e) {
