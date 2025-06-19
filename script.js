@@ -1,6 +1,4 @@
-
-        // Filter and sort jobs on search input, status filter, or sort selection change
-        searchInput.addEventListener("input", debounce(() => renderJobs(), 300));
+));
         statusFilter.addEventListener("change", () => renderJobs());
         sortSelect.addEventListener("change", () => renderJobs());
         
