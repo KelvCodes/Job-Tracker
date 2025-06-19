@@ -1,9 +1,7 @@
 
     
 
-            tab.classList.toggle("active", index === currentTab);
-        });
-        tabContents.forEach((content, index) => {
+   
             content.classList.toggle("active", index === currentTab);
         });
     }
