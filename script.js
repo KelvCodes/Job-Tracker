@@ -1,6 +1,4 @@
-t
-        window.addEventListener("click", (e) => {
-            if (e.target === jobModal) jobModal.style.display = "none";
+tay = "none";
             if (e.target === detailsModal) detailsModal.style.display = "none";
         });
         
